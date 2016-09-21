@@ -32,4 +32,6 @@ clusterGroups[257]
 cluster2 <- subset(movies, clusterGroups == 2)
 cluster2$Title[1:10] # Movies similar to MIB, sorta. Bad boys is in there!!!
 
+# Collaborative and content filtering in harmony work well.
+
 
