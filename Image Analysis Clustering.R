@@ -47,3 +47,10 @@ install.packages("flexclust")
 library("flexclust")
 
 KMC.kcca <- as.kcca(KMC, healthyVector)
+tumorClusters <- predict(KMC.kcca, newdata = tumorVector)
+dim(tumorClusters) <- c(nrow(tumorMatrix), ncol(tumorMatrix))
+image(tumorClusters, axes = F, col = rainbow(k))
+
+
+
+
