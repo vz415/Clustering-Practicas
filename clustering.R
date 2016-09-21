@@ -5,14 +5,16 @@
 # Exercise 0: Install these packages if you don't have them already
 
 # install.packages(c("cluster", "rattle","NbClust"))
-
+library("cluster")
+library("rattle")
+library("NbClust")
 # Now load the data and look at the first few rows
 data(wine, package="rattle")
 head(wine)
 
 # Exercise 1: Remove the first column from the data and scale
 # it using the scale() function
-
+wine <- scale(wine[,-1])
 
 # Now we'd like to cluster the data using K-Means. 
 # How do we decide how many clusters to use if you don't know that already?
@@ -32,12 +34,16 @@ wssplot <- function(data, nc=15, seed=1234){
 	                        ylab="Within groups sum of squares")
 	   }
 
-wssplot(df)
+wssplot(wine)
 
 # Exercise 2:
 #   * How many clusters does this method suggest?
 #   * Why does this method work? What's the intuition behind it?
 #   * Look at the code for wssplot() and figure out how it works
+
+# Answer: suggests 3 clusters due to bend in the chart. Method works by plotting number of clusters against the sum of squares for each 
+# segment of clusters (i.e. 1 to 15). The sum of squares is the distance from the center point to surrounding data points. Makes sense, 
+# because the distance will drop steeply with mroe center points, but when a certain saturation point has been reached, improvements will slow.
 
 # Method 2: Use the NbClust library, which runs many experiments
 # and gives a distribution of potential number of clusters.
