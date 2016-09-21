@@ -29,5 +29,21 @@ str(healthyVector)
 n <- 365636
 n*(n-1)/2
 # let's do k means instead
+# specifying the number of clusters (k)
+k <- 5
+set.seed(1)
+KMC <- kmeans(healthyVector, centers = k, iter.max = 1000)
+str(KMC)
+healthyClusters <- KMC$cluster
+KMC$centers[2]
+# smallest intensity value relates to largest sized cluster. There is more dark in the image, is what that means.
+dim(healthyClusters) <- c(nrow(healthyMatrix), ncol(healthyMatrix))
+image(healthyClusters, axes = F, col = rainbow(k))
+# Finding the tumor
+tumor <- read.csv("tumor.csv", header = F)
+tumorMatrix <- as.matrix(tumor)
+tumorVector <- as.vector(tumorMatrix)
+install.packages("flexclust")
+library("flexclust")
 
-
+KMC.kcca <- as.kcca(KMC, healthyVector)
